@@ -159,6 +159,7 @@ const Index = () => {
           handleSelect('processorModel', null); // Reset model when family changes
           handleSelect('processorCores', null); // Reset cores when family changes
         }}
+        selectedOption={selectedConfig.processorFamily}
       />
       {selectedConfig.processorFamily && (
         <>
@@ -169,6 +170,7 @@ const Index = () => {
               handleSelect('processorModel', option);
               handleSelect('processorCores', null); // Reset cores when model changes
             }}
+            selectedOption={selectedConfig.processorModel}
           />
         </>
       )}
@@ -178,6 +180,7 @@ const Index = () => {
           <ConfigOptions
             options={processorCores[selectedConfig.processorModel.label]}
             onSelect={(option) => handleSelect('processorCores', option)}
+            selectedOption={selectedConfig.processorCores}
           />
         </>
       )}
@@ -185,18 +188,21 @@ const Index = () => {
       <ConfigOptions
         options={memoryOptions}
         onSelect={(option) => handleSelect('memory', option)}
+        selectedOption={selectedConfig.memory}
       />
       <h2>Select Storage</h2>
       <ConfigOptions
         options={storageOptions}
         onSelect={(option) => handleSelect('storage', option)}
+        selectedOption={selectedConfig.storage}
       />
       <h2>Select Size</h2>
       <ConfigOptions
         options={sizeOptions}
         onSelect={(option) => handleSelect('size', option)}
+        selectedOption={selectedConfig.size}
       />
-      <h3>Total Performance: x{calculateTotal()}</h3>
+      <h1 className="total-performance">Total Performance: x{calculateTotal()}</h1>
     </Layout>
   );
 };

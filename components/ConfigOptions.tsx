@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 
 interface Option {
   id: number;
@@ -8,45 +8,22 @@ interface Option {
 
 interface ConfigOptionsProps {
   options: Option[];
-  onSelect: (option: Option) => void;
+  onSelect: (option: Option | null) => void;
+  selectedOption?: Option | null;
 }
 
-const ConfigOptions = ({ options, onSelect }: ConfigOptionsProps) => {
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
-
-  const handleSelect = (option: Option) => {
-    setSelectedOption(option);
-    onSelect(option);
-  };
-
+const ConfigOptions: React.FC<ConfigOptionsProps> = ({ options, onSelect, selectedOption }) => {
   return (
-    <div>
+    <div className="config-options">
       {options.map((option) => (
         <button
           key={option.id}
-          onClick={() => handleSelect(option)}
-          className={selectedOption?.id === option.id ? 'selected' : ''}
+          className={`option-button ${selectedOption && selectedOption.id === option.id ? 'selected' : ''}`}
+          onClick={() => onSelect(option)}
         >
-          {option.label}
+          {option.label} {option.performance && <span>(x{option.performance.toFixed(2)})</span>}
         </button>
       ))}
-      <style jsx>{`
-        button {
-          margin: 10px;
-          padding: 10px;
-          border: 1px solid #ccc;
-          background: #f9f9f9;
-          cursor: pointer;
-          transition: background 0.3s, border-color 0.3s;
-        }
-        button:hover {
-          background: #f1f1f1;
-        }
-        .selected {
-          border-color: #0070f3;
-          background: #e6f7ff;
-        }
-      `}</style>
     </div>
   );
 };

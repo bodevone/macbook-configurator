@@ -13,15 +13,7 @@ const Layout = ({ children }: LayoutProps) => (
       <meta name="description" content="Configure your MacBook Pro" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <header>
-      <nav>
-        <Link href="/">Home</Link>
-      </nav>
-    </header>
     <main>{children}</main>
-    <footer>
-      <p>&copy; 2024 MacBook Configurator</p>
-    </footer>
   </>
 );
 
